@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import BottomFooter from './components/BottomFooter'
+import MainCardColumn from './components/MainCardColumn'
+import MainEndColumn from './components/MainEndColumn'
+import MainNavigation from './components/MainNavigation'
+import TopNavigation from './components/TopNavigation'
+import './styles.css'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='body-flex'>
+      <MainNavigation />
+      <div className='main-container'>
+        <div className='main-flex'>
+          <div className='main-block'>
+            <div className='main-inner-flex'>
+              <MainCardColumn />
+              <MainEndColumn />
+            </div>
+          </div>
+          <BottomFooter />
+        </div>
+        <TopNavigation />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
