@@ -2,13 +2,14 @@ import imageService from '../utils/images'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useState } from 'react'
 
-const Card = ({ post, user, comments }) => {
-  const [comment, setComment] = useState('')
+const Card = ({ post, postComment }) => {
+  const [newComment, setNewComment] = useState('')
 
   const handleComment = (e) => {
     e.preventDefault()
-    setComment('')
-    console.log(comment)
+    setNewComment('')
+    postComment(newComment, post)
+    console.log(newComment)
   }
 
   return (
@@ -17,10 +18,10 @@ const Card = ({ post, user, comments }) => {
         <div className="card-top">
           <div className="card-header">
             <div className="card-header-user-icon-container">
-              <LazyLoadImage src={imageService.getUserImageById(user.icon)} />
+              <LazyLoadImage src={imageService.getUserImageById(post.user.icon)} />
             </div>
             <div className="card-header-name">
-              {user.name}
+              {post.user.username}
             </div>
           </div>
           <div className="card-more-button">
@@ -50,11 +51,11 @@ const Card = ({ post, user, comments }) => {
           </div>
           <div className="card-desc-view">
             <div className="card-desc">
-              <span style={{ fontWeight: 'bold' }}>{user.name} </span>
+              <span style={{ fontWeight: 'bold' }}>{post.user.username} </span>
               {post.desc}
             </div>
             <div className="card-view-comments">
-              View all {comments.length} comments
+              View all {post.comments.length} comments
             </div>
           </div>
           <div className="card-date">
@@ -68,10 +69,9 @@ const Card = ({ post, user, comments }) => {
               <textarea
                 className="card-text-input"
                 role="textbox"
-                contentEditable="true"
-                value={comment}
+                value={newComment}
                 onInput={({ target }) => {
-                  setComment(target.value)
+                  setNewComment(target.value)
                 }}
               />
               <button className="card-post-comment" type='submit'>

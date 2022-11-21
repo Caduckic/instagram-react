@@ -5,7 +5,7 @@ const User = require('../models/user')
 
 postsRouter.get('/', async (request, response) => {
   const posts = await Post.find({})
-    .populate('user', { username: 1 })
+    .populate('user', { username: 1, icon: 1 })
     .deepPopulate('comments.user').exec((err, _post) => {
       if (err) console.log(err, _post)
     })

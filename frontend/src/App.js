@@ -6,14 +6,12 @@ import MainEndColumn from './components/MainEndColumn'
 import TopNavigation from './components/TopNavigation'
 import userService from './services/users'
 import postService from './services/posts'
-import commentService from './services/comments'
 import './styles.css'
 
 const App = () => {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
   const [posts, setPosts] = useState([])
-  const [comments, setComments] = useState([])
 
   useEffect(() => {
     userService
@@ -27,11 +25,6 @@ const App = () => {
       .then(initialPosts => {
         setPosts(initialPosts)
       })
-    commentService
-      .getAll()
-      .then(initialComments => {
-        setComments(initialComments)
-      })
   }, [])
 
   return (
@@ -41,7 +34,14 @@ const App = () => {
         <div className='main-flex'>
           <div className='main-block'>
             <div className='main-inner-flex'>
-              <MainCardColumn users={users} currentUser={currentUser} posts={posts} comments={comments}/>
+              <MainCardColumn
+                users={users}
+                currentUser={currentUser}
+                posts={posts}
+                setPosts={setPosts}
+                setUsers={setUsers}
+                setCurrentUser={setCurrentUser}
+              />
               <MainEndColumn currentUser={currentUser} users={users} />
             </div>
           </div>

@@ -1,22 +1,24 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/comments'
-const postsBaseUrl = 'http://localhost:3001/posts'
-const usersBaseUrl = 'http://localhost:3001/users'
+const baseUrl = 'http://localhost:3001/api/comments'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
   return response.data
 }
 
-const create = async (postId, userId, newCommentObject, newPostObject, newUserObject) => {
-  await axios.put(`${usersBaseUrl}/${userId}`, newUserObject)
-  await axios.put(`${postsBaseUrl}/${postId}`, newPostObject)
-  const response = await axios.post(baseUrl, newCommentObject)
+const getById = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`)
+  return response.data
+}
+
+const create = async (newObject, postId, userId ) => {
+  const response = await axios.post(baseUrl, { content: newObject, post: postId, user: userId })
   return response.data
 }
 
 export default {
   getAll,
+  getById,
   create
 }
