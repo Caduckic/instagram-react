@@ -628,12 +628,13 @@ body {
 
 .card-text-input {
   box-sizing: content-box;
-  display: block;
-  overflow-x: hidden;
+  display: inline-block;
+  white-space: normal;
+  border: none;
+  resize: none;
   flex-grow: 1;
   line-height: 18px;
   max-height: 52px;
-  overflow-y: auto;
   word-break: break-all;
 }
 
@@ -650,11 +651,14 @@ body {
 
 .card-post-comment {
   color: var(--primary-button);
+  background-color: inherit;
+  direction: rtl;
+  border: none;
   text-decoration: none;
   display: block;
   font-size: 14px;
   font-weight: bold;
-  width: 27px;
+  width: 40px;
   height: 18px;
 }
 

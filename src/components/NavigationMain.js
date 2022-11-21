@@ -1,4 +1,7 @@
-const LeftNav = () => {
+import imageService from '../utils/images'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
+const NavigationMain = ({ currentUser }) => {
   return (
     <div className='nav-container'>
       <div className="nav-logo-area">
@@ -40,7 +43,12 @@ const LeftNav = () => {
         </div>
         <div className="nav-profile-container">
           <div className="nav-profile">
-            <span className="nav-profile-icon-container"><img src="elmo.png"/></span>
+            <span className="nav-profile-icon-container">
+              {!currentUser 
+                ? null
+                : <LazyLoadImage src={imageService.getUserImageById(currentUser.icon)}/>
+              }
+            </span>
             <div>Profile</div>
           </div>
         </div>
@@ -54,4 +62,4 @@ const LeftNav = () => {
   )
 }
 
-export default LeftNav
+export default NavigationMain

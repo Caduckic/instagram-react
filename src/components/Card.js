@@ -1,14 +1,26 @@
-const Card = () => {
+import imageService from '../utils/images'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { useState } from 'react'
+
+const Card = ({ post, user, comments }) => {
+  const [comment, setComment] = useState('')
+
+  const handleComment = (e) => {
+    e.preventDefault()
+    setComment('')
+    console.log(comment)
+  }
+
   return (
     <div className="card-container">
       <div className="card">
         <div className="card-top">
           <div className="card-header">
             <div className="card-header-user-icon-container">
-              <img src="elmo.png" />
+              <LazyLoadImage src={imageService.getUserImageById(user.icon)} />
             </div>
             <div className="card-header-name">
-              jeff
+              {user.name}
             </div>
           </div>
           <div className="card-more-button">
@@ -16,7 +28,7 @@ const Card = () => {
           </div>
         </div>
         <div className="card-middle">
-          <img src="elmo.png"/>
+          <LazyLoadImage src={imageService.getPostImageById(post.image)} />
         </div>
         <div className="card-bottom">
           <div className="card-buttons">
@@ -34,33 +46,37 @@ const Card = () => {
             </div>
           </div>
           <div className="card-likes">
-            707 likes
+            {post.likes} likes
           </div>
           <div className="card-desc-view">
             <div className="card-desc">
-              <span style={{ fontWeight: 'bold' }}>Jeff </span>
-              here's elmo brah
+              <span style={{ fontWeight: 'bold' }}>{user.name} </span>
+              {post.desc}
             </div>
             <div className="card-view-comments">
-              View all 6 comments
+              View all {comments.length} comments
             </div>
           </div>
           <div className="card-date">
-            2 DAYS AGO
+            {post.date} DAYS AGO
           </div>
           <div className="card-comment-form-container">
-            <form className="card-comment-form">
+            <form className="card-comment-form" onSubmit={handleComment}>
               <div className="card-emoji-button">
                 <span className="material-icons">sentiment_satisfied_alt</span>
               </div>
-              <span
+              <textarea
                 className="card-text-input"
-                role="textbox" 
+                role="textbox"
                 contentEditable="true"
-              ></span>
-              <a href="#post" className="card-post-comment">
+                value={comment}
+                onInput={({ target }) => {
+                  setComment(target.value)
+                }}
+              />
+              <button className="card-post-comment" type='submit'>
                 Post
-              </a>
+              </button>
             </form>
           </div>
         </div>

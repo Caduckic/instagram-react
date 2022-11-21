@@ -1,12 +1,12 @@
-import SideCurrentUser from "./SideCurrentUser"
-import SideFooter from "./SideFooter"
-import SuggestedUsers from "./SuggestedUsers"
+import SideCurrentUser from './SideCurrentUser'
+import SideFooter from './SideFooter'
+import SuggestedUsers from './SuggestedUsers'
 
-const MainEndColumn = () => {
+const MainEndColumn = ({ currentUser, users }) => {
   return (
     <div className='main-end-column'>
-      <SideCurrentUser />
-      <SuggestedUsers />
+      <SideCurrentUser user={currentUser}/>
+      <SuggestedUsers users={users.filter(user => user.id !== currentUser.id)}/>
       <SideFooter />
     </div>
   )

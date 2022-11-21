@@ -1,6 +1,12 @@
-import SuggestedUser from "./SuggestedUser"
+import SuggestedUser from './SuggestedUser'
 
-const SuggestedUsers = () => {
+const SuggestedUsers = ({ users }) => {
+  let reducedUsers = []
+  
+  for (let i = 0; i < users.length && i < 5; i++) {
+    reducedUsers[i] = users[i]
+  }
+
   return (
     <div className='end-suggested-users'>
       <div className="suggestions-header">
@@ -8,11 +14,9 @@ const SuggestedUsers = () => {
         <div className="suggestions-button">See All</div>
       </div>
       <div className='end-suggested-users-container'>
-        <SuggestedUser />
-        <SuggestedUser />
-        <SuggestedUser />
-        <SuggestedUser />
-        <SuggestedUser />
+        {reducedUsers.map(user => {
+          return <SuggestedUser key={user.id} user={user} />
+        })}
       </div>
     </div>
   )

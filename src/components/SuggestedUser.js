@@ -1,12 +1,15 @@
-const SuggestedUser = () => {
+import imageService from '../utils/images'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
+const SuggestedUser = ({ user }) => {
   return (
     <div className="end-suggested-user">
       <div className="end-suggested-user-icon-container">
-        <img src="elmo.png"/>
+        <LazyLoadImage src={imageService.getUserImageById(user.icon)} />
       </div>
       <div className="end-username-container">
         <div className="end-username">
-          not jeff
+          {user.name}
         </div>
         <div className="end-username-after">
           Someone Else

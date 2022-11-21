@@ -1,12 +1,16 @@
-const SideCurrentUser = () => {
+import imageService from '../utils/images'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
+const SideCurrentUser = ({ user }) => {
+  if (!user) return null
   return (
     <div className="end-current-user">
       <div className="end-current-user-icon-container">
-        <img src="elmo.png"/>
+        <LazyLoadImage src={imageService.getUserImageById(user.icon)}/>
       </div>
       <div className="end-username-container">
         <div className="end-username">
-          jeff
+          {user.name}
         </div>
         <div className="end-username-after">
           Jeremy Roffey
