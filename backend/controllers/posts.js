@@ -2,6 +2,7 @@ const postsRouter = require('express').Router()
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 const User = require('../models/user')
+const userExtractor = require('../utils/middleware').userExtractor
 
 postsRouter.get('/', async (request, response) => {
   const posts = await Post.find({})
@@ -13,9 +14,9 @@ postsRouter.get('/', async (request, response) => {
   response.json(posts)
 })
 
-postsRouter.post('/', async (request, response) => {
+postsRouter.post('/', userExtractor, async (request, response) => {
   const body = request.body
-  const user = await User.findById(body.user)
+  const user = request.user
 
   const post = new Post({
     description: body.description,
@@ -54,23 +55,35 @@ postsRouter.put('/:id', async (request, response) => {
 })
 
 postsRouter.delete('/:id', async (request, response) => {
+  const token = request.token
+  if (!token) {
+    return response.status(400).json({ error: 'invalid or missing token' })
+  }
+
   const post = await Post.findById(request.params.id)
-  const comments = await Comment.find({ post: { $in: post._id } })
-  const user = await User.findOne({ posts: { $in: post._id } })
+  if (post.user.toString() === token.id) {
+    const comments = await Comment.find({ post: { $in: post._id } })
+    const user = await User.findById(post.user)
+    
+    user.posts = user.posts.filter(p => p.toString() !== post._id.toString())
+    await user.save()
 
-  user.posts = user.posts.filter(p => p.toString() !== post._id.toString())
-  await user.save()
+    comments.forEach(async comment => {
+      const commentedUser = await User.findOne({ comments: { $in: comment._id } })
+      commentedUser.comments = commentedUser.comments.filter(c => c.toString() !== comment._id.toString())
+      await commentedUser.save()
+      await comment.remove()
+    })
 
-  comments.forEach(async comment => {
-    const commentedUser = await User.findOne({ comments: { $in: comment._id } })
-    commentedUser.comments = commentedUser.comments.filter(c => c.toString() !== comment._id.toString())
-    await commentedUser.save()
-    await comment.remove()
-  })
+    await post.remove()
 
-  await post.remove()
+    response.status(204).end()
+  }
+  else {
+    response.status(400).json({ error: 'Cannot delete other user\' user posts' })
+  }
 
-  response.status(204).end()
+  
 })
 
 module.exports = postsRouter

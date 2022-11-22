@@ -1,8 +1,8 @@
 import Footer from './Footer'
 
-const BottomFooter = () => {
+const BottomFooter = ({ isLogin }) => {
   return (
-    <div className="footer">
+    <div className={ isLogin ? 'footer-stay' : 'footer'}>
       <div className="footer-flex">
         <Footer />
       </div>

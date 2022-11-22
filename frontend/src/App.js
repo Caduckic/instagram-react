@@ -7,6 +7,8 @@ import TopNavigation from './components/TopNavigation'
 import userService from './services/users'
 import postService from './services/posts'
 import './styles.css'
+import LoginScreen from './components/LoginScreen'
+import SignupScreen from './components/SignupScreen'
 
 const App = () => {
   const [users, setUsers] = useState([])
@@ -28,28 +30,31 @@ const App = () => {
   }, [])
 
   return (
-    <div className='body-flex'>
-      <NavigationMain currentUser={currentUser}/>
-      <div className='main-container'>
-        <div className='main-flex'>
-          <div className='main-block'>
-            <div className='main-inner-flex'>
-              <MainCardColumn
-                users={users}
-                currentUser={currentUser}
-                posts={posts}
-                setPosts={setPosts}
-                setUsers={setUsers}
-                setCurrentUser={setCurrentUser}
-              />
-              <MainEndColumn currentUser={currentUser} users={users} />
+    <>
+      <div className='body-flex'>
+        <NavigationMain currentUser={currentUser}/>
+        <div className='main-container'>
+          <div className='main-flex'>
+            <div className='main-block'>
+              <div className='main-inner-flex'>
+                <MainCardColumn
+                  users={users}
+                  currentUser={currentUser}
+                  posts={posts}
+                  setPosts={setPosts}
+                  setUsers={setUsers}
+                  setCurrentUser={setCurrentUser}
+                />
+                <MainEndColumn currentUser={currentUser} users={users} />
+              </div>
             </div>
+            <BottomFooter />
           </div>
-          <BottomFooter />
+          <TopNavigation />
         </div>
-        <TopNavigation />
       </div>
-    </div>
+    </>
+    
   )
 }
 

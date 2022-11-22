@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  passwordHash: {
+    type: String,
+    required: true
+  },
   icon: {
     type: Number,
     required: true
@@ -36,6 +40,7 @@ userSchema.set('toJSON', {
       returnedObject.id = returnedObject._id.toString()
       delete returnedObject._id
       delete returnedObject.__v
+      delete returnedObject.passwordHash
     }
   }
 })
