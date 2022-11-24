@@ -10,10 +10,10 @@ const SideCurrentUser = ({ user }) => {
       </div>
       <div className="end-username-container">
         <div className="end-username">
-          {user.name}
+          {user.username}
         </div>
         <div className="end-username-after">
-          Jeremy Roffey
+          {user.name}
         </div>
       </div>
       <a href="#switch" className="end-user-button">

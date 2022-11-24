@@ -2,7 +2,7 @@ import Card from './Card'
 import StoryCard from './StoryCard'
 import commentService from '../services/comments'
 
-const MainCardColumn = ({ users, currentUser, posts, setPosts, setUsers, setCurrentUser }) => {
+const MainCardColumn = ({ users, currentUser, posts, setPosts }) => {
   const postComment = (comment, post) => {
     console.log(post.id, currentUser.id)
     commentService
@@ -16,10 +16,6 @@ const MainCardColumn = ({ users, currentUser, posts, setPosts, setUsers, setCurr
         setPosts(posts.map(p =>
           p.id !== updatedPost.id ? p : updatedPost
         ))
-        setUsers(users.map(u =>
-          u.id !== updatedUser.id ? u : updatedUser
-        ))
-        setCurrentUser(updatedUser)
       })
   }
 

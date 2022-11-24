@@ -1,6 +1,12 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/posts'
+const baseUrl = '/api/posts'
+
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
@@ -12,7 +18,28 @@ const like = async (id, newObject) => {
   return response.data
 }
 
+const create = async () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.post(baseUrl, config)
+  return response.data
+}
+
+const remove = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config)
+  return response.data
+}
+
 export default {
   getAll,
-  like
+  like,
+  create,
+  remove,
+  setToken
 }

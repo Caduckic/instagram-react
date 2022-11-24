@@ -9,7 +9,7 @@ const SuggestedUser = ({ user }) => {
       </div>
       <div className="end-username-container">
         <div className="end-username">
-          {user.name}
+          {user.username}
         </div>
         <div className="end-username-after">
           Someone Else

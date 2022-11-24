@@ -1,3 +1,6 @@
+import imageService from '../utils/images'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { Link } from 'react-router-dom'
 import BottomFooter from './BottomFooter'
 
 const SignupScreen = () => {
@@ -14,14 +17,14 @@ const SignupScreen = () => {
             <input placeholder='Username' />
             <input placeholder='Password' type='password' />
             <select placeholder='User Icon'>
-              <option>e</option>
+              <option style={ { backgroundImage: `url(${imageService.getUserImageById(1)})` } } >1</option>
               <option>2</option>
             </select>
             <button className='login-button' type='submit'>Sign up</button>
           </form>
         </div>
         <div className='create-user-box'>
-          <div>Have an account? <a href='#create' className='link'>Log in</a></div>
+          <div>Have an account? <Link to='/login' className='link'>Log in</Link></div>
         </div>
       </div>
       <BottomFooter isLogin={true} />

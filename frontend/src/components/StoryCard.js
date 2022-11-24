@@ -15,7 +15,7 @@ const StoryCard = ({ users }) => {
                 <LazyLoadImage src={imageService.getUserImageById(user.icon)} />
               </div>
               <div className="story-card-username">
-                {user.name}
+                {user.username}
               </div>
             </div>
           )

@@ -1,60 +1,40 @@
 import { useEffect, useState } from 'react'
-import BottomFooter from './components/BottomFooter'
-import MainCardColumn from './components/MainCardColumn'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { applyUser } from './reducers/authReducer'
 import NavigationMain from './components/NavigationMain'
-import MainEndColumn from './components/MainEndColumn'
-import TopNavigation from './components/TopNavigation'
-import userService from './services/users'
-import postService from './services/posts'
-import './styles.css'
 import LoginScreen from './components/LoginScreen'
 import SignupScreen from './components/SignupScreen'
+import MainScreen from './components/MainScreen'
+import './styles.css'
 
 const App = () => {
-  const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
-  const [posts, setPosts] = useState([])
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    userService
-      .getAll()
-      .then(initialUsers => {
-        setUsers(initialUsers)
-        setCurrentUser(initialUsers[0])
-      })
-    postService
-      .getAll()
-      .then(initialPosts => {
-        setPosts(initialPosts)
-      })
-  }, [])
+    const loggedUserJSON = window.localStorage.getItem('loggedInstaDemoUser')
+    if (loggedUserJSON) {
+      const jsonUser = JSON.parse(loggedUserJSON)
+      dispatch(applyUser(jsonUser))
+      navigate('/main')
+    } else {
+      navigate('/login')
+    }
+  }, [dispatch])
 
   return (
-    <>
+    <> 
       <div className='body-flex'>
-        <NavigationMain currentUser={currentUser}/>
-        <div className='main-container'>
-          <div className='main-flex'>
-            <div className='main-block'>
-              <div className='main-inner-flex'>
-                <MainCardColumn
-                  users={users}
-                  currentUser={currentUser}
-                  posts={posts}
-                  setPosts={setPosts}
-                  setUsers={setUsers}
-                  setCurrentUser={setCurrentUser}
-                />
-                <MainEndColumn currentUser={currentUser} users={users} />
-              </div>
-            </div>
-            <BottomFooter />
-          </div>
-          <TopNavigation />
-        </div>
+        {(auth.user === null || auth.token === null) ? null : <NavigationMain currentUser={auth.user} />}
+        <Routes>
+          <Route path='/login' element={<LoginScreen />} />
+          <Route path='/signup' element={<SignupScreen />} />
+          <Route path='/main' element={<MainScreen />} />
+        </Routes>
       </div>
     </>
-    
   )
 }
 
