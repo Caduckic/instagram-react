@@ -23,7 +23,7 @@ const MainCardColumn = ({ users, currentUser, posts, setPosts }) => {
     <div className='main-card-column'>
       <StoryCard users={users.filter(user => user.hasStory && user.id !== currentUser.id)} />
       <div className='card-flex'>
-        {posts.map(post => {
+        {posts.reverse().map(post => {
           return (
             <Card key={post.id} post={post} postComment={postComment} />
           )

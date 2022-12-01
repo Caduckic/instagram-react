@@ -14,36 +14,88 @@ import icon5 from '../images/icon5.jpg'
 import icon6 from '../images/icon6.jpg'
 
 const images = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6,
-  image7,
-  image8
+  {
+    image: image1,
+    id: 1
+  },
+  {
+    image: image2,
+    id: 2
+  },
+  {
+    image: image3,
+    id: 3
+  },
+  {
+    image: image4,
+    id: 4
+  },
+  {
+    image: image5,
+    id: 5
+  },
+  {
+    image: image6,
+    id: 6
+  },
+  {
+    image: image7,
+    id: 7
+  },
+  {
+    image: image8,
+    id: 8
+  },
 ]
 
 const icons = [
-  icon1,
-  icon2,
-  icon3,
-  icon4,
-  icon5,
-  icon6
+  {
+    image: icon1,
+    id: 1
+  },
+  {
+    image: icon2,
+    id: 2
+  },
+  {
+    image: icon3,
+    id: 3
+  },
+  {
+    image: icon4,
+    id: 4
+  },
+  {
+    image: icon5,
+    id: 5
+  },
+  {
+    image: icon6,
+    id: 6
+  }
 ]
 
 const getPostImageById = (id) => {
   if (id > 8 || id < 1) return image1
-  return images[id - 1]
+  return images[id - 1].image
 }
 
 const getUserImageById = (id) => {
   if (id > 6 || id < 1) return icon1
-  return icons[id - 1]
+  return icons[id - 1].image
+}
+
+const getPostImages = () => {
+  return images
+}
+
+const getUserImages = () => {
+  return icons
 }
 
 export default {
   getPostImageById,
-  getUserImageById
+  getUserImageById,
+  getPostImages,
+  getUserImages
 }

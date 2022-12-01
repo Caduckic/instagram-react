@@ -28,10 +28,14 @@ postsRouter.post('/', userExtractor, async (request, response) => {
   })
 
   const savedPost = await post.save()
+  
   user.posts = user.posts.concat(savedPost._id)
   await user.save()
 
-  response.status(201).json(savedPost)
+  const populatedPost = await Post.findById(savedPost._id)
+    .populate('user', { username: 1, icon: 1 })
+
+  response.status(201).json(populatedPost)
 })
 
 postsRouter.put('/:id', async (request, response) => {

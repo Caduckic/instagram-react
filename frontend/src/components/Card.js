@@ -52,7 +52,7 @@ const Card = ({ post, postComment }) => {
           <div className="card-desc-view">
             <div className="card-desc">
               <span style={{ fontWeight: 'bold' }}>{post.user.username} </span>
-              {post.desc}
+              {post.description}
             </div>
             <div className="card-view-comments">
               View all {post.comments.length} comments

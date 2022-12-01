@@ -1,7 +1,7 @@
 import imageService from '../utils/images'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const NavigationMain = ({ currentUser }) => {
+const NavigationMain = ({ currentUser, setOverlay }) => {
   return (
     <div className='nav-container'>
       <div className="nav-logo-area">
@@ -37,7 +37,7 @@ const NavigationMain = ({ currentUser }) => {
           </div>
         </div>
         <div className="nav-create-container">
-          <div className="nav-create">
+          <div className="nav-create" onClick={() => setOverlay('POST')}>
             <span className="material-icons-outlined">add_box</span><div>Create</div>
           </div>
         </div>

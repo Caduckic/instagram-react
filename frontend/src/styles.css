@@ -35,6 +35,235 @@ body {
   width: 100%;
 }
 
+.overlay-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.overlay-box {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--primary-border-color);
+  border-radius: 12px;
+  max-height: 897px;
+  background-color: var(--primary-background);
+}
+
+.overlay-box-header-flex {
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  height: 42px;
+  border-bottom: 1px solid var(--primary-border-color);
+}
+
+.overlay-box-header {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+}
+
+.overlay-box-back-button {
+  z-index: 1;
+  cursor: pointer;
+  width: 48px;
+  height: 100%;
+}
+
+.overlay-box-back-button > span {
+  box-sizing: border-box;
+  margin-left: 8px;
+  padding: 8px;
+}
+
+.overlay-box-header-button {
+  background-color: inherit;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
+  z-index: 1;
+  cursor: pointer;
+  color: var(--primary-button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 62px;
+}
+
+.post-form-flex {
+  flex-grow: 1;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+}
+
+.overlay-post-form {
+  box-sizing: border-box;
+  display: flex;
+}
+
+.overlay-post-form-image {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 855px;
+  width: 855px;
+  max-width: 70vw;
+  max-height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-post-form-image > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  font-size: 64px;
+}
+
+.overlay-post-form-image > span:hover {
+  background-color: var(--secondary-background);
+  scale: 1.08;
+}
+
+.overlay-post-form-image > span:active {
+  scale: 0.95;
+  opacity: var(--secondary-opacity);
+}
+
+.overlay-post-image-select {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  max-width: 555px;
+  max-height: 555px;
+  height: 50%;
+  width: 50%;
+  position: absolute;
+}
+
+.image-select-container {
+  position: relative;
+}
+
+.image-select-container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-select-cover {
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.image-select-container:hover > .image-select-cover {
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.post-form-image-select {
+  width: 300px;
+  max-width: 50%;
+}
+
+.overlay-post-selected-image, .overlay-post-selected-image > img {
+  object-fit: cover;
+  border-radius: 0 0 12px 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-post-desc-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 16px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 308px;
+}
+
+.overlay-post-desc-user {
+  display: flex;
+  align-items: center;
+  margin: 18px 0 14px;
+  font-weight: bold;
+  width: 100%;
+  height: 28px;
+}
+
+.overlay-post-desc-user > img {
+  object-fit: cover;
+  margin-right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.overlay-post-desc-input {
+  resize: none;
+  width: 100%;
+  height: 168px;
+  max-height: 100%;
+  border: none;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.overlay-post-desc-input::placeholder {
+  color: var(--secondary-text);
+}
+
+.overlay-post-desc-input:focus {
+  outline: none;
+}
+
+.overlay-post-desc-max {
+  color: var(--tertiary-text);
+  font-size: 14px;
+  text-align: right;
+}
+
+.overlay-exit {
+  position: absolute;
+  padding: 8px;
+  color: white;
+  top: 10px;
+  right: 10px;
+}
+
+.overlay-exit:hover {
+  cursor: pointer;
+}
+
+.overlay-exit > * {
+  font-size: 32px;
+}
+
 .top-nav {
   display: none;
   box-sizing: border-box;
@@ -144,6 +373,68 @@ body {
   height: 70px;
 }
 
+.create-user-icon-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.create-user-icon-dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: 3;
+}
+
+.dropdown-image-cover {
+  background-color: rgba(255, 255, 255, 0);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.dropdown-image-container {
+  position: relative;
+  width: 100%
+}
+
+.dropdown-image-container > img {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-image-container:hover > .dropdown-image-cover {
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.create-user-icon {
+  display: none;
+  justify-content: center;
+  padding: 16px;
+}
+
+.create-user-icon-dropdown-content > *:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.create-user-icon-dropdown:hover .create-user-icon-dropdown-content {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.create-user-icon-dropbtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-user-icon-dropbtn > span {
+  line-height: 20px;
+}
+
 .login-logo {
   font-family: 'Cookie', cursive;
   font-size: 48px;
@@ -157,14 +448,14 @@ body {
   flex-direction: column;
 }
 
-.login-form > input, .login-button, .signup-form > input, .signup-form > select {
+.login-form > input, .login-button, .signup-form > input, .signup-form > .create-user-icon-dropdown {
   box-sizing: border-box;
   margin: 0 40px 6px;
   height: 38px;
   border-radius: 3px;
 }
 
-.login-form > input, .signup-form > input, .signup-form > select {
+.login-form > input, .signup-form > input, .signup-form > .create-user-icon-dropdown {
   padding: 8px;
   border: 1px solid var(--primary-border-color);
   background-color: var(--secondary-background);
@@ -912,5 +1203,16 @@ body {
   .login-box, .create-user-box {
     border: none;
     background-color: var(--secondary-background);
+  }
+  .overlay-exit {
+    padding: 0;
+    top: 0;
+    right: 0;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .overlay-post-form {
+    padding: 5px;
   }
 }

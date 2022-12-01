@@ -18,12 +18,12 @@ const like = async (id, newObject) => {
   return response.data
 }
 
-const create = async () => {
+const create = async (post) => {
   const config = {
     headers: { Authorization: token },
   }
 
-  const response = await axios.post(baseUrl, config)
+  const response = await axios.post(baseUrl, post, config)
   return response.data
 }
 

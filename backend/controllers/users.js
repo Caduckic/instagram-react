@@ -17,6 +17,12 @@ usersRouter.get('/:id', async (request, response) => {
 usersRouter.post('/', async (request, response) => {
   const body = request.body
 
+  if (!body.username || !body.name || !body.password || !body.icon) {
+    return response.status(400).json({
+      error: 'missing fields'
+    })
+  }
+
   if (body.username.length < 3 || body.password.length < 3) {
     return response.status(400).json({
       error: 'username and password must be more than 3 characters'

@@ -7,9 +7,8 @@ import MainEndColumn from './MainEndColumn'
 import BottomFooter from './BottomFooter'
 import TopNavigation from './TopNavigation'
 
-const MainScreen = () => {
+const MainScreen = ({ posts, setPosts }) => {
   const [users, setUsers] = useState([])
-  const [posts, setPosts] = useState([])
 
   const user = useSelector(state => state.auth.user)
 
